@@ -1,17 +1,21 @@
 ﻿/*!
-* MI.Picker v1.2.4
+* MI.Picker v1.2.5
 * -jQuery +
 * -Bootstrap v3.3.7
 *
-* v1.1.0 - 2/23/2017: added feature to search list 
+* v1.1.0 - 2/23/2017: added feature to search list
 * v1.2.0 - 3/02/2017: ability to add a list of buttons to a DIV tag
 * v1.2.1 - 3/07/2017: add multiSelect option. When using DIVs, you can build a list of buttons and pre-select the item without opening and closing the model.
 * v1.2.2 - 3/21/2017: Add isSubModal option. When using picker as a parent modal, upon close removes the class="modal-open" from the <body> tag to allow scrolling on the main page.
 * v1.2.3 - 3/22/2017: Truncate text longer than 30 characters
-* v1.2.4 - 4/11/2017: BUG FIXES, 
-                        - Relocate AJAX after the intital check for existing modal picker. AJAX calls were made on every call instead of the 1st call only. 
-                        - Relocate the callback function within the button click event to fired once a selection was made.
+* v1.2.4 - 4/11/2017: BUG FIXES,
+                        - Relocate AJAX after the intital check for existing modal picker. AJAX calls were made on every call instead of the 1st call only.
+                        - Relocate the onSelected callback function within the button click event to fired once a selection was made.
                         - When Searching, not able to merge simple ({Value: '', Text: ''}) model to filtered array.
+v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional information for each item.
+                        - NOTE: Since MS SelectListItem class doesn't inculde the "Title" property, must use a anyomus type class object ({Value: '', Text: '', Title: ''}) to build model.
+                        Renamed the 'callback' option to 'onSelected' to provide better understanding and usability.
+v1.2.6 - 6/12/2017: Added feature to include a blank option at the top of the list. Useful for allowing users to blank/clear the selected picked item.
 */
 
 if (typeof jQuery === 'undefined') {
@@ -33,7 +37,8 @@ if (typeof jQuery === 'undefined') {
             url: null,
             multiSelect: false,
             isSubModal: false,
-            callback: function () { }
+            showBlank: false,
+            onSelected: function () { }
         };
 
         var settings = $.extend({}, defaults, options);
@@ -164,6 +169,8 @@ if (typeof jQuery === 'undefined') {
                             newRow.Selected = settings.data[r].Selected == undefined ? "" : settings.data[r].Selected;
                             newRow.Text = settings.data[r].Text == undefined ? "" : settings.data[r].Text;
                             newRow.Value = settings.data[r].Value == undefined ? "" : settings.data[r].Value;
+                            //Tooltip title
+                            newRow.Title = settings.data[r].Title == undefined ? "" : settings.data[r].Title;
 
                             filteredData.push(newRow);
                         }
@@ -196,19 +203,30 @@ if (typeof jQuery === 'undefined') {
             //Display the Modal window
             $('#' + settings.id).modal('show');
 
+
+            //Init Bootstrap Tooltips
+            setTooltips();
+
+
             /*== Function to rebuild the table with search results ==*/
             function RenderTableRows(data) {
                 var id = settings.id;
                 $('#' + id).find('tbody').empty();
 
                 var totalRows = 0;
-                if (data != null) {
+                if (data != null && data.length > 0) {
+
+                    //ShowBlank - insert a blank option at beginning of list
+                    if (data[0].Value != 0 && settings.showBlank === true) {
+                        data.unshift({ Value: 0, Text: "" });
+                    }
+
                     $(data).each(function () {
                         var row = tbody.insertRow();
                         $(row).empty();
 
                         var cell = row.insertCell();
-                        $(cell).css('text-align', 'center');
+                        $(cell).css({ 'text-align': 'center', 'width': '40px' });
 
                         var btn = document.createElement('button');
                         btn.setAttribute('data-name', this.Text);
@@ -275,15 +293,16 @@ if (typeof jQuery === 'undefined') {
                             }
 
                             //Do any callback once item is selected
-                            if (typeof settings.callback == 'function') {
-                                settings.callback.call();
+                            if (typeof settings.onSelected == 'function') {
+                                settings.onSelected.call();
                             }
 
                         });
 
                         cell.appendChild(btn);
-
                         cell = row.insertCell();
+                        $(cell).attr('data-toggle', 'picker-tooltip').attr('title', this.Title);
+
                         if (this.Text.length > 30)
                             cell.innerText = this.Text.substring(0, 30) + '...';
                         else
@@ -297,13 +316,16 @@ if (typeof jQuery === 'undefined') {
                     var cell = tbody.insertRow()//.insertCell();
                     cell.innerHTML = '<td colspan="2">No records.</td>';
                 }
-
                 //add overflow when over 15 records
                 if (totalRows > 15) {
                     $(divOverflow).css('height', '500px');
                     $(divOverflow).css('overflow-x', 'auto');
                 }
-            }
+
+                //Init Bootstrap Tooltips
+                setTooltips();
+
+            } //end RenderTableRows()
 
             /*== Close Modal */
             function closeMe() {
@@ -311,13 +333,18 @@ if (typeof jQuery === 'undefined') {
                 if (settings.isSubModal)
                     $('body').addClass('modal-open');
             }
+
+            /*== Bootstrap Tooltips */
+            function setTooltips() {
+                $('[data-toggle="picker-tooltip"]').tooltip({
+                    animation: false,
+                    placement: "top"
+                });
+            }
         });
-
-
-
     };// end plugin
-
 }(jQuery));
+
 
 $(document).on('click', '.RemoveListItem', function () {
     $(this).remove();

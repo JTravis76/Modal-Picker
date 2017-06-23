@@ -4,7 +4,7 @@ $(document).ready(function () {
     var color = [{ Text: "Black", Value: "1" }, { Text: "Blue", Value: "2" }, { Text: "Green", Value: "3" }, { Text: "Red", Value: "4" }, { Text: "Silver", Value: "5" }];
 
     $('#btn-color-picker').click(function () {
-        $('#txt-color').Picker({ title: 'Colors', data: color });
+        $('#txt-color').Picker({ title: 'Colors', data: color, showBlank: true });
     });
 
     $('#btn-multi-picker').click(function () {

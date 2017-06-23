@@ -1,7 +1,7 @@
-// Type definitions for PORTS.Picker
-// Project: PORTS.Picker
-// Definitions by: Jeremy Travis <mailto:Jeremy.Travis@fbport.com>
-// v1.0.2
+// Type definitions for MI.Picker
+// Project: MI.Picker
+// Definitions by: Jeremy Travis <mailto:jtravis28@gmail.com>
+// v1.0.4
 
 interface PickerOptions {
     id?: string;
@@ -12,8 +12,9 @@ interface PickerOptions {
     ajax?: boolean;
     multiSelect?: boolean;
     isSubModal?: boolean;
+    showBlank?: boolean;
     url?: string;
-    callback?: any;
+    onSelected?: any;
 }
 
 interface JQuery {
