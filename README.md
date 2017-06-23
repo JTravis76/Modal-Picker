@@ -1,7 +1,7 @@
 # Modal-Picker
 A JQuery plugin that creates a Bootstrap modal picker.
 
-* Modal-Picker v1.2.4 requirements:
+* Modal-Picker v1.2.6 requirements:
 * -jQuery +
 * -Bootstrap v3.3.7
 
@@ -119,6 +119,11 @@ buttonTemplate:&#39;<span style="color: #007700">&lt;i</span> <span style="color
 			<td>(optional)	function()</td>
 			<td>provide additional jquery functionally once the selection has been made.</td>
 		</tr>
+		<tr>
+			<td>showBlank</td>
+			<td>(optional)	false</td>
+			<td>place a blank item at top of list to allow uses to clear a selected item.</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -136,3 +141,7 @@ Change History
                         - Relocate AJAX after the intital check for existing modal picker. AJAX calls were made on every call instead of the 1st call only. 
                         - Relocate the callback function within the button click event to fired once a selection was made.
                         - When Searching, not able to merge simple ({Value: '', Text: ''}) model to filtered array.
+v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional information for each item.
+                        - NOTE: Since MS SelectListItem class doesn't inculde the "Title" property, must use a anyomus type class object ({Value: '', Text: '', Title: ''}) to build model.
+                        Renamed the 'callback' option to 'onSelected' to provide better understanding and usability.
+v1.2.6 - 6/12/2017: Added feature to include a blank option at the top of the list. Useful for allowing users to blank/clear the selected picked item.
