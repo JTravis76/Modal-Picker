@@ -140,8 +140,8 @@ Change History
 * v1.2.4 - 4/11/2017: BUG FIXES, 
                         - Relocate AJAX after the intital check for existing modal picker. AJAX calls were made on every call instead of the 1st call only. 
                         - Relocate the callback function within the button click event to fired once a selection was made.
-                        - When Searching, not able to merge simple ({Value: '', Text: ''}) model to filtered array.
-v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional information for each item.
+                        - When Searching, not able to merge simple ({Value: '', Text: ''}) model to filtered array.			
+* v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional information for each item.
                         - NOTE: Since MS SelectListItem class doesn't inculde the "Title" property, must use a anyomus type class object ({Value: '', Text: '', Title: ''}) to build model.
                         Renamed the 'callback' option to 'onSelected' to provide better understanding and usability.
-v1.2.6 - 6/12/2017: Added feature to include a blank option at the top of the list. Useful for allowing users to blank/clear the selected picked item.
+* v1.2.6 - 6/12/2017: Added feature to include a blank option at the top of the list. Useful for allowing users to blank/clear the selected picked item.
