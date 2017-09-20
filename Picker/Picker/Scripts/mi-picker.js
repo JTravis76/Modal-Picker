@@ -1,5 +1,5 @@
 /*!
-* MI.Picker v1.2.7
+* PORTS.Picker v1.2.8
 * -jQuery +
 * -Bootstrap v3.3.7
 *
@@ -17,6 +17,7 @@ v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional inf
 					Renamed the 'callback' option to 'onSelected' to provide better understanding and usability.
 v1.2.6 - 6/12/2017: Added option to insert a blank item at top of list. Use option showBlank: true,
 v1.2.7 - 8/23/2017: Set default focus to search box upon opening modal window
+v1.2.8 - 8/30/2017: Option to display "disabled" items via CSS style while allowing the user to select it.
 */
 
 if (typeof jQuery === 'undefined') {
@@ -206,14 +207,14 @@ if (typeof jQuery === 'undefined') {
 			//Display the Modal window
 			$('#' + settings.id).modal('show');
 
-		  //set focus to search box
+		    //set focus to search box
 			$('#' + settings.id + '-search').focus();
 
-		  //Init Bootstrap Tooltips
+		    //Init Bootstrap Tooltips
 			setTooltips();
 
 
-        /*== Function to rebuild the table with search results ==*/
+            /*== Function to rebuild the table with search results ==*/
 		    function RenderTableRows(data) {		        
 		        var id = settings.id;
 		        $('#' + id).find('tbody').empty();
@@ -306,14 +307,24 @@ if (typeof jQuery === 'undefined') {
 
 		                cell.appendChild(btn);
 
-		                cell = row.insertCell();
-
+                        cell = row.insertCell();                        
 		                $(cell).attr('data-toggle', 'picker-tooltip').attr('title', this.Title);
 
                         if (this.Text.length > 30)
-                            cell.innerText = this.Text.substring(0, 30) + '...';
-		                else
-                            cell.innerText = this.Text;
+                            if (!this.Disabled)
+                                cell.innerText = this.Text.substring(0, 30) + '...';
+                            else {
+                                $(cell).css({"background-color":"mistyRose","cursor":"not-allowed"});
+                                cell.innerHTML = '<span style="color:red; font-decoration:line-through; font-style:italic;" >' + this.Text.substring(0, 30) + '</span>';
+                            }
+                                
+                        else
+                            if (!this.Disabled)
+                                cell.innerText = this.Text;
+                            else {
+                                $(cell).css({ "background-color": "mistyRose", "cursor": "not-allowed" });
+                                cell.innerHTML = '<span style="color:red; font-decoration:line-through; font-style:italic;" >' + this.Text + '</span>';
+                            }
 
 		                totalRows++;
 		            });
@@ -371,7 +382,7 @@ var sampleData = [{
 	Text: "Sample test 1",
 	Value: "1"
 }, {
-	Disabled: false,
+	Disabled: true,
 	Group: {
 		Disabled: false,
 		Name: "Group-1"
