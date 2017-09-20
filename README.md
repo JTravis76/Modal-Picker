@@ -1,7 +1,7 @@
 # Modal-Picker
 A JQuery plugin that creates a Bootstrap modal picker.
 
-* Modal-Picker v1.2.7 requirements:
+* Modal-Picker v1.2.8 requirements:
 * -jQuery +
 * -Bootstrap v3.3.7
 
@@ -146,3 +146,4 @@ Change History
                         Renamed the 'callback' option to 'onSelected' to provide better understanding and usability.
 * v1.2.6 - 6/12/2017: Added feature to include a blank option at the top of the list. Useful for allowing users to blank/clear the selected picked item.
 * v1.2.7 - 8/23/2017: Set default focus to search box upon opening modal window
+* v1.2.8 - 8/30/2017: Option to display "disabled" items via CSS style while allowing the user to select it.
