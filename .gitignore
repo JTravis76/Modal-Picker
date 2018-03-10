@@ -242,5 +242,7 @@ ModelManifest.xml
 .fake/
 
 # Auto-generated JS files
-**\Picker\Picker\Scripts\index.js
-**\Picker\Picker\Scripts\index.js.map
+/Picker/Picker/Scripts/mi-picker.js.map
+/Picker/Picker/Scripts/mi-picker.js
+/Picker/Picker/Scripts/index.js.map
+/Picker/Picker/Scripts/index.js

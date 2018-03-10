@@ -74,7 +74,6 @@
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\mi-picker.js" />
     <Content Include="tsconfig.json" />
-    <Content Include="Scripts\index.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,6 +92,7 @@
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\Picker\index.d.ts" />
     <TypeScriptCompile Include="Typescript-ref\index.ts" />
+    <TypeScriptCompile Include="Typescript-ref\mi-picker.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
