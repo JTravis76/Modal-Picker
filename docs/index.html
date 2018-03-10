@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>JQuery Modal Picker</title>
+	<meta charset="utf-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />    
+</head>
+<body>
+    <div class="container" style="margin-top:25px;">
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Basic Picker with custom data -->
+                <div id="basic-picker" class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Basic Picker</div>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="form-group form-inline">
+                            <label class="control-label">Color:</label>
+                            <input id="txt-color" type="text" class="form-control" disabled="disabled" />
+                            <button id="btn-color-picker" type="button" class="btn btn-xs btn-primary">...</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- Multi-Picker -->
+                <div id="multi-picker" class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Multi-Select Picker <button id="btn-multi-picker" type="button" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus-sign"></span></button></div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="div-pick"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="Scripts/mi-picker.js"></script>
+    <script src="Scripts/index.js"></script>
+</body>
+</html>
