@@ -9,43 +9,217 @@
     <div class="container" style="margin-top:25px;">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-2">
+                <ul class="nav">
+                    <li><a href="#basic-picker">Basic Picker</a></li>
+                    <li><a href="#multi-picker">Multi-picker</a></li>
+                    <li><a href="#ajax-picker">AJAX-picker</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#plugin-options">Plug-in Option</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-10">
                 <!-- Basic Picker with custom data -->
-                <div id="basic-picker" class="panel panel-primary">
+                <div id="basic-picker" class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Basic Picker</div>
                     </div>
-                    <div class="panel-body">
-
+                    <div class="panel-body">    
                         <div class="form-group form-inline">
                             <label class="control-label">Color:</label>
                             <input id="txt-color" type="text" class="form-control" disabled="disabled" />
                             <button id="btn-color-picker" type="button" class="btn btn-xs btn-primary">...</button>
+                        </div>    
+                        <div>
+                            Populate picker from Javascript Object.
+                            <!-- HTML generated using hilite.me -->
+                            <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                                <pre style="margin: 0; line-height: 125%"><span style="color: #008000; font-weight: bold">var</span> color <span style="color: #666666">=</span> [{ Text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Black&quot;</span>, Value<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;1&quot;</span> }, { Text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Blue&quot;</span>, Value<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;2&quot;</span> }, { Text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Green&quot;</span>, Value<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;3&quot;</span> }, { Text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Red&quot;</span>, Value<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;4&quot;</span> }, { Text<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;Silver&quot;</span>, Value<span style="color: #666666">:</span> <span style="color: #BA2121">&quot;5&quot;</span> }];</pre>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
                 <!-- Multi-Picker -->
-                <div id="multi-picker" class="panel panel-primary">
+                <div id="multi-picker" class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Multi-Select Picker <button id="btn-multi-picker" type="button" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus-sign"></span></button></div>
                     </div>
                     <div class="panel-body">
-                        <div id="div-pick"></div>
+                        <div id="div-pick" style="min-height:100px;"></div>
+                    </div>
+                </div>
+                <!-- AJAX Picker -->
+                <div id="ajax-picker" class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">AJAX Picker</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group form-inline">
+                            <label class="control-label">Product:</label>
+                            <input id="txt-ajax" type="text" class="form-control" disabled="disabled" />
+                            <button id="btn-ajax-picker" type="button" class="btn btn-xs btn-primary">...</button>
+                        </div>
+                        <div>
+                            Server MVC code example:
+                            <!-- HTML generated using hilite.me -->
+                            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"><span style="color: #0000CC">[HttpGet]</span>
+<span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> <span style="color: #0066BB; font-weight: bold">Get</span>(<span style="color: #333399; font-weight: bold">string</span> <span style="color: #008800; font-weight: bold">group</span>)
+{
+System.Collections.Generic.List&lt;SelectListItem&gt; model = <span style="color: #008800; font-weight: bold">new</span> System.Collections.Generic.List&lt;SelectListItem&gt;();
+    <span style="color: #008800; font-weight: bold">for</span> (<span style="color: #333399; font-weight: bold">int</span> p = <span style="color: #6600EE; font-weight: bold">1</span>; p &lt; <span style="color: #6600EE; font-weight: bold">36</span>; p++) {
+    model.Add(<span style="color: #008800; font-weight: bold">new</span> SelectListItem() { Value = p.ToString(), Text = <span style="background-color: #fff0f0">&quot;Product &quot;</span> + p.ToString(), Group = <span style="color: #008800; font-weight: bold">new</span> SelectListGroup() { Name = <span style="background-color: #fff0f0">&quot;Group 1&quot;</span>, Disabled = <span style="color: #008800; font-weight: bold">false</span> }, Disabled = <span style="color: #008800; font-weight: bold">false</span>, Selected = <span style="color: #008800; font-weight: bold">false</span>});
+}
+<span style="color: #333399; font-weight: bold">var</span> json = <span style="color: #008800; font-weight: bold">new</span> System.Web.Script.Serialization.JavaScriptSerializer().Serialize(model.OrderBy(x =&gt; x.Text).ToList());
+<span style="color: #008800; font-weight: bold">return</span> json;
+}
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--How It Work-->
+                <div id="how-it-works" class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">How It Works</div>
+                    </div>
+                    <div class="panel-body">
+                        <!-- HTML generated using hilite.me -->
+                        <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+<pre style="margin: 0; line-height: 125%"> During the Picker plugin creation, the <span style="color: #008000; font-weight: bold">&lt;div&gt;</span> wrapper is appended to <span style="color: #008000; font-weight: bold">&lt;body&gt;</span> tag at the bottom of page. This allow quick loading through-out the entire web application.
+    When using ajax parameter, the ajax is only called once to create the picker modal. If user clicked again, plugin checks to see if the modal Id already exist. If TRUE, simply display the modal.
+    Selected text and value are copied to the <span style="color: #008000; font-weight: bold">&lt;input&gt;</span> element. Text will display in the field while also adding the data-name=&quot;text&quot; and data-id=&quot;value&quot; to that element.
+    When using a <span style="color: #008000; font-weight: bold">&lt;div&gt;</span> element, buttons are created to allow user to select more than one item from the list.
+</pre>
+                        </div>
+                    </div>
+                </div>
+                <!--Plug-in Options-->
+                <div id="plugin-options" class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Plug-in Options</div>
+                    </div>
+                    <div class="panel-body">
+                        Modal Picker accepts a few options to better customize the picker modal.
+                        <p>&nbsp;</p>
+                        <table class="table table-condensed table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>(optional)	MyModal	</td>
+                                    <td>overrides the default parent Id of the modal div.</td>
+                                </tr>
+                                <tr>
+                                    <td>title</td>
+                                    <td>(optional)	Title Goes Here</td>
+                                    <td>overrides the default modal title.</td>
+                                </tr>
+                                <tr>
+                                    <td>group</td>
+                                    <td>(optional)	NULL</td>
+                                    <td>returns specific group when using server calls, see ajax. Also, append group name to css class for additional jquery functionally.</td>
+                                </tr>
+                                <tr>
+                                    <td>buttonTemplate</td>
+                                    <td>(optional)	NULL</td>
+                                    <td>If not set, will use Bootstrap 'gyphicon-unchecked' for the button image.
+                                           <span class="text-info"> NOTE: text is place inside of a button tag. </span>
+                                        <!-- HTML generated using hilite.me -->
+                                    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%">
+    buttonTemplate: &#39;pickMe&#39; 
+    Or do a FontAwesome icon like this: 
+    buttonTemplate:&#39;<span style="color: #007700">&lt;i</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;fa fa-circle&quot;</span><span style="color: #007700">&gt;&lt;/i&gt;</span>&#39;
+    </pre>
+                                        </div>
+                                    </td>
+                                </tr>					
+                                <tr>
+                                    <td>data</td>
+                                    <td>(optional)	NULL</td>
+                                    <td>provide a custom set of data to fill the picker values. This data model is
+                                based from Microsoft MVC SelectListItem class.
+                                <span class="text-info">Javascript Object = [{Text: "Sample test 1", Value: "1", Group: {Name: "Group-1"} }]</span></td>
+                                </tr>
+                                <tr>
+                                    <td>ajax</td>
+                                    <td>(optional)	false</td>
+                                    <td>when true, will make a ajax call to server with return Json result to fill the picker values.</td>
+                                </tr>
+                                <tr>
+                                    <td>url</td>
+                                    <td>(optional)	NULL</td>
+                                    <td>required when ajax set to true. URL of server controller to fetch Json data model.
+                                </tr>							
+                                <tr>
+                                    <td>multiSelect</td>
+                                    <td>(optional)	false</td>
+                                    <td>Turns picker into a multi-select mode to prevent opening and closing a modal window. Great when using DIV elements!</td>
+                                </tr>
+                                <tr>
+                                    <td>isSubModal</td>
+                                    <td>(optional)	false</td>
+                                    <td>When using the picker from another modal window, set this to true to allow parent modal to scroll (when needed).</td>
+                                </tr>
+                                <tr>
+                                    <td>callback</td>
+                                    <td>(optional)	function()</td>
+                                    <td>provide additional jquery functionally once the selection has been made.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
         
-
     </div>
 
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="Scripts/mi-picker.js"></script>
-    <script src="Scripts/index.js"></script>
+    <script src="mi-picker.js"></script>
+    <script src="data.json"></script>
+    <script>
+    $(document).ready(function () {
+
+        var color = [{ Text: "Black", Value: "1" }, { Text: "Blue", Value: "2" }, { Text: "Green", Value: "3" }, { Text: "Red", Value: "4" }, { Text: "Silver", Value: "5" }];
+
+        $('#btn-color-picker').click(function () {
+            $('#txt-color').Picker({ 
+                title: 'Colors', 
+                data: color, 
+                showBlank: true 
+            });
+        });
+
+        $('#btn-multi-picker').click(function () {
+            $('#div-pick').Picker({ 
+                id: 'MultiPicker', 
+                multiSelect: true 
+            });
+        });
+
+var model = [
+        { "Value": 1, "Text": "Product 1"},
+        { "Value": 2, "Text": "Product 2"},
+        { "Value": 3, "Text": "Product 3"},
+        { "Value": 4, "Text": "Product 4", "Disabled": true, "Title": "Out of Stock"},
+        { "Value": 5, "Text": "Product 5"},
+        { "Value": 6, "Text": "Product 6"},
+        { "Value": 7, "Text": "Product 7"},
+        { "Value": 8, "Text": "Product 8"}
+    ]
+        $('#btn-ajax-picker').click(function () {
+            $('#txt-ajax').Picker({ 
+                id: 'AjaxPicker', 
+                title: "Products", 
+                data: model
+                //ajax: true, 
+                //url: '' 
+            });
+        });
+    });
+    </script>
 </body>
 </html>
