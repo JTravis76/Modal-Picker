@@ -1,5 +1,5 @@
 ﻿/*!
-* PORTS.Picker v1.2.8
+* PORTS.Picker v1.2.9
 * -jQuery +
 * -Bootstrap v3.3.7
 *
@@ -18,6 +18,7 @@ v1.2.5 - 5/15/2017: Added feature, Bootstrap's tooltip to display additional inf
 v1.2.6 - 6/12/2017: Added option to insert a blank item at top of list. Use option showBlank: true,
 v1.2.7 - 8/23/2017: Set default focus to search box upon opening modal window
 v1.2.8 - 8/30/2017: Option to display "disabled" items via CSS style while allowing the user to select it.
+v1.2.9 - 5/30/2018: Fix bug when using Value = "0000" not creating the blank reset value = "0"
 */
 
 if (typeof jQuery === 'undefined') {
@@ -223,7 +224,7 @@ if (typeof jQuery === 'undefined') {
                 if (data != null && data.length > 0) {
 
                     //ShowBlank - insert a blank option at beginning of list
-                    if (data[0].Value != 0 && settings.showBlank === true) {
+                    if (data[0].Value != "0" && settings.showBlank === true) {
                         data.unshift({ Value: 0, Text: "" });
                     }
 
